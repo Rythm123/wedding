@@ -91,7 +91,7 @@ const Home = () => {
 
             <div className="confirmation">
                 <h1>Help us with your Confirmation</h1>
-                <p>This will help us to avoid accomodation related inconveniences</p>
+                <p>This will help us avoid accomodation related inconveniences</p>
 
                 <Link>Click here to fill the form </Link>
             </div>
