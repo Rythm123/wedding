@@ -1,25 +1,60 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Body from './Components/Body';
+import Home from './Components/Home';
+import Navbar from './Components/Navbar';
+import AppContext from './utils/AppContext';
+import {createBrowserRouter,RouterProvider} from 'react-router-dom';
+import Login from './Components/Login';
+import Event from './Components/Event';
+import WithAuth from './Components/WithAuth';
+import BackgroundMusic from './Components/BackgroundMusic';
+import rangrez from './assets/rangrez.mp3'
+
 
 function App() {
+
+  const [state,setState]=useState('heelo')
+  const router=createBrowserRouter([
+    {
+      path:'/',
+      element:<> <Navbar/> <Body/> </>,
+      children:[
+        {
+          path:'/',
+          element:WithAuth(Home)
+        },
+
+        {
+          path:'/login',
+          element:<Login/>
+        },
+
+        {
+          path:'/event',
+          element:<Event/>
+        }
+
+
+      ]
+    }
+  ])
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{state}}>
+      {/* <BackgroundMusic src={rangrez} /> */}
+      <RouterProvider router={router} />
+    </AppContext.Provider>
   );
 }
 
 export default App;
+
+
+/**
+ * 
+ * Navbar
+ * Body
+ * 
+ * 
+ */
