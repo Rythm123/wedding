@@ -5,10 +5,12 @@ const Home = () => {
 
     const [days, setDays] = useState(0);
     const [events, setEvents] = useState([]);
+    const [exploreMore,setExploreMore]=useState(null)
 
     useEffect(() => {
         daysBetweenDates('2024-07-11');
         getWeddingDayInfo();
+        getRichTextContent();
     }, [])
 
     const getWeddingDayInfo = async () => {
@@ -16,6 +18,13 @@ const Home = () => {
         const json = await data.json();
         setEvents(json?.results);
         console.log(json);
+    }
+
+    const getRichTextContent=async()=>{
+        const data= await fetch('https://cdn.builder.io/api/v3/content/webcontent?apiKey=83c63d0712bc49a08269b91fadef8128');
+        const json=await data.json();
+        console.log(json)
+        setExploreMore(json?.results[0].data.content)
     }
 
     function daysBetweenDates(setDate) {
@@ -35,8 +44,15 @@ const Home = () => {
 
     }
 
+    const handleClick = () => {
+        localStorage.clear();
+        window.location.pathname = '/'
+    }
+
     return (
         <div className='home-page' >
+
+            <button onClick={handleClick} className="logout">Logout</button>
 
             {/* <div className="prehero">
                 <h1> ITS WEDDING TIME!! </h1>
@@ -83,10 +99,7 @@ const Home = () => {
             <div className="thingsToDo">
                 <h1 className="title">Explore More</h1>
 
-                <ul className="attractions">
-                    <li>Golden Temple</li>
-
-                </ul>
+                    <div dangerouslySetInnerHTML={{__html:exploreMore}} />
 
             </div>
         </div>
