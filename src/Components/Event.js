@@ -11,15 +11,16 @@ const Event = () => {
 
     const day = searchParams.get('day');
     useEffect(() => {
+        const getEventsPerDay = async () => {
+            const data = await fetch('https://cdn.builder.io/api/v3/content/wedding-events?apiKey=83c63d0712bc49a08269b91fadef8128&query.data.day=' + day);
+            const json = await data.json();
+            console.log('event', json)
+            setEvents(json?.results[0]?.data?.allEvents)
+        }
         getEventsPerDay();
-    },[])
+    },[day])
 
-    const getEventsPerDay = async () => {
-        const data = await fetch('https://cdn.builder.io/api/v3/content/wedding-events?apiKey=83c63d0712bc49a08269b91fadef8128&query.data.day=' + day);
-        const json = await data.json();
-        console.log('event', json)
-        setEvents(json?.results[0]?.data?.allEvents)
-    }
+
 
 
 

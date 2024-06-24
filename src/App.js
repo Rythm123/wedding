@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css';
 import Body from './Components/Body';
 import Home from './Components/Home';
@@ -39,7 +38,7 @@ function App() {
   ])
   
   return (
-    <AppContext.Provider value={{state}}>
+    <AppContext.Provider value={{}}>
       {/* <BackgroundMusic src={rangrez} /> */}
       <RouterProvider router={router} />
     </AppContext.Provider>
