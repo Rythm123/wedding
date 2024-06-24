@@ -6,7 +6,7 @@ const Login = () => {
     const [mobile, setMobile] = useState('');
     const [registeredMobile, setRegisteredMobile] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [showError,setShowError]=useState(false)
+    const [showError, setShowError] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -33,28 +33,26 @@ const Login = () => {
         if (!mobile) return;
         if (registeredMobile.length === 0) return;
 
-        registeredMobile.forEach((user) => {
-            if (Number(user.data.userMobile )=== mobile) {
-                console.log('login successful');
-                localStorage.setItem('authenticated', "true");
-                localStorage.setItem('user', JSON.stringify(user));
-                setIsAuthenticated(true);
-            } else {
-                console.log('authentication failed');
-               
-            }
-        });
-
-        setShowError(true)
+        const user = registeredMobile.find((user) => Number(user.data.userMobile) === Number(mobile));
+        if (user) {
+            console.log('login successful');
+            localStorage.setItem('authenticated', "true");
+            localStorage.setItem('user', JSON.stringify(user));
+            setIsAuthenticated(true);
+            setShowError(false); // Hide error message on successful login
+        } else {
+            console.log('authentication failed');
+            setShowError(true); // Show error message on failed login
+        }
 
         console.log('clicked');
     };
 
     useEffect(() => {
         if (isAuthenticated) {
-            navigate('/');
+            window.location.pathname='/'
         }
-    }, [isAuthenticated,navigate]);
+    }, [isAuthenticated, navigate]);
 
     return (
         <div className='login-wrapper'>
@@ -67,9 +65,9 @@ const Login = () => {
                     onChange={handleChange}
                     placeholder='Enter your Mobile Number'
                 />
-                <button onClick={(e)=>handleSubmit(e)} disabled={!mobile}>Login</button>
+                <button onClick={handleSubmit} disabled={!mobile}>Login</button>
             </div>
-            {showError && <p style={{textAlign:'center'}}>Please login using correct mobile number</p>}
+            {showError && <p style={{ textAlign: 'center' }}>Please login using correct mobile number</p>}
         </div>
     );
 };
