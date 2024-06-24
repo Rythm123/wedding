@@ -10,6 +10,9 @@ const Event = () => {
     console.log(searchParams.get('day'))
 
     const day = searchParams.get('day');
+    useEffect(() => {
+        getEventsPerDay();
+    },[])
 
     const getEventsPerDay = async () => {
         const data = await fetch('https://cdn.builder.io/api/v3/content/wedding-events?apiKey=83c63d0712bc49a08269b91fadef8128&query.data.day=' + day);
@@ -18,9 +21,7 @@ const Event = () => {
         setEvents(json?.results[0]?.data?.allEvents)
     }
 
-    useEffect(() => {
-        getEventsPerDay();
-    }, [searchParams])
+
 
     return (
         <div className='event-page'>
@@ -40,7 +41,7 @@ const Event = () => {
                         <hr />
                         <div className="location">
                             <p className="lname">{event.venue}</p>
-                            <a href={event?.location} target="_blank" className="direction">Get Directions</a>
+                            <a href={event?.location}  className="direction">Get Directions</a>
                         </div>
 
                     </div>

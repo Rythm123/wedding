@@ -34,7 +34,7 @@ const Login = () => {
         if (registeredMobile.length === 0) return;
 
         registeredMobile.forEach((user) => {
-            if (user.data.userMobile == mobile) {
+            if (Number(user.data.userMobile )=== mobile) {
                 console.log('login successful');
                 localStorage.setItem('authenticated', "true");
                 localStorage.setItem('user', JSON.stringify(user));
@@ -54,7 +54,7 @@ const Login = () => {
         if (isAuthenticated) {
             navigate('/');
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated,navigate]);
 
     return (
         <div className='login-wrapper'>

@@ -8,13 +8,11 @@ import {createBrowserRouter,RouterProvider} from 'react-router-dom';
 import Login from './Components/Login';
 import Event from './Components/Event';
 import WithAuth from './Components/WithAuth';
-import BackgroundMusic from './Components/BackgroundMusic';
-import rangrez from './assets/rangrez.mp3'
+
 
 
 function App() {
 
-  const [state,setState]=useState('heelo')
   const router=createBrowserRouter([
     {
       path:'/',
