@@ -91,9 +91,11 @@ const Home = () => {
 
             <div className="confirmation">
                 <h1>Help us with your Confirmation</h1>
-                <p>This will help us avoid accomodation related inconveniences</p>
+                <p className='note'>This will help us avoid accomodation related inconveniences</p>
+                <p className="note">We all will be staying at Sanjog International wef July 10, 11 am onwards till July 12,10am </p>
 
-                <Link>Click here to fill the form </Link>
+
+                <a href='https://surveyheart.com/form/667ae3e501b8a67727effb74' >Click here to fill the form </a>
             </div>
 
             <div className="thingsToDo">

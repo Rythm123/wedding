@@ -15,7 +15,7 @@ const Login = () => {
 
     const getRegisteredMobile = async () => {
         try {
-            const data = await fetch('https://cdn.builder.io/api/v3/content/webusers?apiKey=83c63d0712bc49a08269b91fadef8128&cacheSeconds=0&staleCacheSeconds=0');
+            const data = await fetch('https://cdn.builder.io/api/v3/content/webusers?apiKey=83c63d0712bc49a08269b91fadef8128&cacheSeconds=0&staleCacheSeconds=0&limit=100');
             const json = await data.json();
             console.log(json);
             setRegisteredMobile(json?.results || []);
